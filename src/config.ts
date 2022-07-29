@@ -2,7 +2,7 @@ export const DEV_MODE = process.env.NODE_ENV !== 'production';
 
 export const GUILD_ID = DEV_MODE
 	? process.env.DEV_GUILD_ID
-	: '';
+	: '699366121593372752';
 
 export const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 
