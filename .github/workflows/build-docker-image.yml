@@ -6,14 +6,13 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  TAG_NAME: ${{ env.REGISTRY }}/fys-help-bot:$(date +%s)
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag fys-help-bot:$(date +%s)
       # push to githubs docker registry
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -25,5 +24,5 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/fys-help-bot:${{ $(date +%s) }}
+          tags: ${{ env.TAG_NAME }}
           file: ./Dockerfile
