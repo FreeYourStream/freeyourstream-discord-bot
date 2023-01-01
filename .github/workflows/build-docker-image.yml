@@ -6,7 +6,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TAG_NAME: ghcr.io/fys-help-bot:$(date +%s)
 
 jobs:
   build:
@@ -20,9 +19,11 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "NAME=${{ env.REGISTRY }}/fys-help-bot:$(date +%s)" >> $GITHUB_OUTPUT
+        id: tag
       - name: Push the Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           push: true
-          tags: ${{ env.TAG_NAME }}
+          tags: ${{ steps.tag.outputs.NAME }}
           file: ./Dockerfile
