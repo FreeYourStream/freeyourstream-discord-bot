@@ -6,7 +6,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TAG_NAME: ${{ env.REGISTRY }}/fys-help-bot:$(date +%s)
+  TAG_NAME: ghcr.io/fys-help-bot:$(date +%s)
 
 jobs:
   build:
